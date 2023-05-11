@@ -86,18 +86,19 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #f0f0f0;
+  color: #292929;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+table {
+  margin-bottom: 4rem;
+  text-align: left;
+  width: 80vw;
 }
 
 @media (prefers-color-scheme: dark) {
