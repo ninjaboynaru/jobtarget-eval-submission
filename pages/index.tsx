@@ -11,15 +11,18 @@ async function getUsers() {
 	return data;
 }
 
+const MAX_PR_TO_SHOW = 3
+const MAX_USER_TO_SHOW = 4
+
 export default function Home() {
   const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
-    getUsers().then((users) => setUsers(users));
+    getUsers().then((users) => setUsers(users.slice(0, MAX_USER_TO_SHOW)));
   }, []);
 
   const userListElements = users.map((user) => {
-	const userPullRequestElements = user.pull_requests.slice().map((pullRequest) => {
+	const userPullRequestElements = user.pull_requests.slice(0, MAX_PR_TO_SHOW).map((pullRequest) => {
 		return (
 			<tr key={`${pullRequest.repo_name}:${pullRequest.title}:${pullRequest.created_at}`}>
 				<td>{pullRequest.repo_name}</td>
