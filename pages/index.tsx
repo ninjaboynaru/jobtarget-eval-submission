@@ -12,34 +12,42 @@ async function getUsers() {
 }
 
 export default function Home() {
-  const [users, setUsers] = useState<IUser[]>();
+  const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
     getUsers().then((users) => setUsers(users));
   }, []);
 
+  const userListElements = users.map((user) => {
+	const userPullRequestElements = user.pull_requests.slice().map((pullRequest) => {
+		return (
+			<tr key={`${pullRequest.repo_name}:${pullRequest.title}:${pullRequest.created_at}`}>
+				<td>{pullRequest.repo_name}</td>
+				<td>{pullRequest.title}</td>
+			</tr>
+		)
+	})
+
+	return (
+		<div key={user.id}>
+		<h2>User: {user.nickname}</h2>
+		<table>
+		  <tbody>
+			<tr>
+			  <th>Repo</th>
+			  <th>PR Titles</th>
+			</tr>
+			{userPullRequestElements}
+		  </tbody>
+		</table>
+	  </div>
+	)
+  })
+
   return (
     <main className={styles.main}>
       <div className={inter.className}>
-        {users?.map((user) => (
-          <div>
-            <h2>User: {user.name}</h2>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Repo</th>
-                  <th>PR Titles</th>
-                </tr>
-                {user.pullRequests.map((inner) => (
-                  <tr>
-                    <td>{inner.repo_name}</td>
-                    <td>{inner.title}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
+		{userListElements}
       </div>
     </main>
   );
