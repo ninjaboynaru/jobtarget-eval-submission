@@ -27,7 +27,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchData().then((data) => setPrList(data));
-  });
+  }, []);
 
   return (
     <main className={styles.main}>
