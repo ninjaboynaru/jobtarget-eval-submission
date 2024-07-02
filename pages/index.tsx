@@ -12,25 +12,25 @@ async function getUsers() {
 }
 
 export default function Home() {
-  const [prList, setPrList] = useState<IUser[]>();
+  const [users, setUsers] = useState<IUser[]>();
 
   useEffect(() => {
-    getUsers().then((data) => setPrList(data));
+    getUsers().then((users) => setUsers(users));
   }, []);
 
   return (
     <main className={styles.main}>
       <div className={inter.className}>
-        {prList?.map((elm) => (
+        {users?.map((user) => (
           <div>
-            <h2>User: {elm.name}</h2>
+            <h2>User: {user.name}</h2>
             <table>
               <tbody>
                 <tr>
                   <th>Repo</th>
                   <th>PR Titles</th>
                 </tr>
-                {elm.pullRequests.map((inner) => (
+                {user.pullRequests.map((inner) => (
                   <tr>
                     <td>{inner.repo_name}</td>
                     <td>{inner.title}</td>
