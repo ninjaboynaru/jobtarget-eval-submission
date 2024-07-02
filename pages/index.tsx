@@ -32,7 +32,7 @@ export default function Home() {
 	})
 
 	return (
-		<div key={user.id}>
+	<li key={user.id}>
 		<h2>User: {user.nickname}</h2>
 		<table>
 		  <tbody>
@@ -43,15 +43,15 @@ export default function Home() {
 			{userPullRequestElements}
 		  </tbody>
 		</table>
-	  </div>
+	  </li>
 	)
   })
 
   return (
     <main className={styles.main}>
-      <div className={inter.className}>
+      <ul className={inter.className}>
 		{userListElements}
-      </div>
+      </ul>
     </main>
   );
 }
