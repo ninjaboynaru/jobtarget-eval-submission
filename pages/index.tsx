@@ -35,15 +35,15 @@ export default function Home() {
       <li key={user.id}>
         <h2>User: {user.nickname}</h2>
         <table>
-		  <tbody>
+          <tbody>
             <tr>
-			  <th>Repo</th>
-			  <th>PR Title</th>
+              <th>Repo</th>
+              <th>PR Title</th>
             </tr>
             {userPullRequestElements}
-		  </tbody>
+          </tbody>
         </table>
-	  </li>
+      </li>
     )
   })
 
