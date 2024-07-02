@@ -16,7 +16,7 @@ interface IPullRequests {
   pullRequests: { title: string; repo_name: string }[];
 }
 
-export function Home() {
+export default function Home() {
   const [prList, setPrList] = useState<IPullRequests[]>();
 
   const fetchData = async (): Promise<IPullRequests[]> => {
