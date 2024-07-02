@@ -6,17 +6,16 @@ import { IUser } from '@/pages/types/user'
 
 const inter = Inter({ subsets: ["latin"] });
 
+async function getUsers() {
+	const { data } = await axios("/api/pullRequests/user");
+	return data;
+}
+
 export default function Home() {
   const [prList, setPrList] = useState<IUser[]>();
 
-  const fetchData = async (): Promise<IUser[]> => {
-    const { data } = await axios("/api/pullRequests/user");
-	console.log(':::', data)
-    return data;
-  };
-
   useEffect(() => {
-    fetchData().then((data) => setPrList(data));
+    getUsers().then((data) => setPrList(data));
   }, []);
 
   return (
