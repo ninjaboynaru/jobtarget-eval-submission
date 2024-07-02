@@ -2,26 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
+import { IUser } from '@/pages/types/user'
 
 const inter = Inter({ subsets: ["latin"] });
 
-interface IPullRequests {
-  id: number;
-  name: string;
-  gravatar_id: string;
-  github_profile: string | null;
-  twitter_profile: string | null;
-  contributions_count: number;
-  link: string;
-  pullRequests: { title: string; repo_name: string }[];
-}
-
 export default function Home() {
-  const [prList, setPrList] = useState<IPullRequests[]>();
+  const [prList, setPrList] = useState<IUser[]>();
 
-  const fetchData = async (): Promise<IPullRequests[]> => {
-    // Documentation: https://24pullrequests.com/api
-    const { data } = await axios("https://24pullrequests.com/users.json");
+  const fetchData = async (): Promise<IUser[]> => {
+    const { data } = await axios("/api/pullRequests/user");
+	console.log(':::', data)
     return data;
   };
 
